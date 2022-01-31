@@ -1,0 +1,26 @@
+{
+  "name": "blogging_system",
+  "version": "1.0.0",
+  "description": "Its full stack repo for a blogging website .",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamid-ali/blogging_system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamid-ali/blogging_system/issues"
+  },
+  "homepage": "https://github.com/hamid-ali/blogging_system#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
