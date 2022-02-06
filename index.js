@@ -1,19 +1,20 @@
 const path = require('path')
 
-const expressEdge = require('express-edge')
-
-
-
 const express = require('express')
 
 const app = new express()
 
 app.use(express.static('public'))
 
+const { config, engine } = require('express-edge');
+ 
+// Configure Edge if need to
+config({ cache: process.env.NODE_ENV === 'production' });
+ 
+// Automatically sets view engine and adds dot notation to app.render
+app.use(engine);
 
-app.use(expressEdge)
-
-app.set('views' , `${__dirname}\views`)
+app.set('views', `${__dirname}/views`);
 
 app.get('/' , (req , res) => {
 
@@ -26,20 +27,25 @@ app.get('/' , (req , res) => {
 
 app.get('/about' , (req , res) => {
 
-    res.sendfile(path.resolve(__dirname , 'pages/about.html'))
+    // res.sendfile(path.resolve(__dirname , 'pages/about.html'))
+
+    res.render('about')
 
 })
 
 
 app.get('/contact' , (req , res) => {
 
-    res.sendfile(path.resolve(__dirname , 'pages/contact.html'))
+    // res.sendfile(path.resolve(__dirname , 'pages/contact.html'))
 
+    res.render('contact')
 })
 
 app.get('/post' , (req , res) => {
 
-    res.sendfile(path.resolve(__dirname , 'pages/post.html'))
+    // res.sendfile(path.resolve(__dirname , 'pages/post.html'))
+
+    res.render('post')
 
 })
 
