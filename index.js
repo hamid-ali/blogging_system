@@ -1,8 +1,14 @@
+//Reference git repo https://github.com/bahdcasts/node-js-blog
+
 const path = require('path')
 
 const express = require('express')
 
 const app = new express()
+
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb+srv://hamid:hamidali@cluster0.911w9.mongodb.net/node-js-blog?retryWrites=true&w=majority')
 
 app.use(express.static('public'))
 
@@ -49,7 +55,10 @@ app.get('/post' , (req , res) => {
 
 })
 
+app.get('/post/newpost' , (req , res) =>{
 
+    res.render('create')
+})
 
 
 app.listen(4000 , () => {
