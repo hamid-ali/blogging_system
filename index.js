@@ -8,6 +8,10 @@ const app = new express()
 
 const mongoose = require('mongoose')
 
+const bodyParser = require("body-parser")
+
+const Post = require("./database/models/post")
+
 mongoose.connect('mongodb+srv://hamid:hamidali@cluster0.911w9.mongodb.net/node-js-blog?retryWrites=true&w=majority')
 
 app.use(express.static('public'))
@@ -22,14 +26,38 @@ app.use(engine);
 
 app.set('views', `${__dirname}/views`);
 
-app.get('/' , (req , res) => {
+app.use(bodyParser.json());
 
+app.use(bodyParser.urlencoded({ extended : true }))
+
+
+
+app.get('/' , async(req , res) => {
+    
     // res.sendFile(path.resolve(__dirname , 'pages/index.html'))
 
-    res.render('index')
+    const posts = await(Post.find({})) ;
+
+    console.log(posts)
+
+
+    res.render('index' , {
+        posts
+    })
 
 })
 
+app.post('/posts/store' ,(req, res)=>{
+
+    Post.create( req.body , (err , post)=>{
+
+        res.redirect("/")
+
+    } )
+    
+    
+
+})
 
 app.get('/about' , (req , res) => {
 
